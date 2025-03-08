@@ -1,21 +1,23 @@
 #include <stdio.h>
-
 int main()
 {
-    int t, n, dp[41] = {0, 1};
-    
-    for(int i = 2; i < 41; i++)
-        dp[i] = dp[i - 1] + dp[i - 2];
-        
-    scanf("%d", &t);
-    for(int i = 0; i < t; i++)
-    {
-        scanf("%d", &n);
-		if (n == 0)
-			printf("1 0\n");
-		else
-	        printf("%d %d\n", dp[n - 1], dp[n]);
+    int a,b,i;
+    long long int arr[101]={1,1};
+    scanf("%d",&a);
+    for(i=2;i<=101;i++){
+        arr[i]=arr[i-1]+arr[i-2];
     }
-
+    for(i=0;i<a;i++){
+        scanf("%d",&b);
+        if(b==0){
+            printf("%d %d\n",1,0);
+        }
+        else if(b==1){
+            printf("%d %d\n",0,1);
+        }
+        else{
+            printf("%lld %lld\n",arr[b-2],arr[b-1]);
+        }
+    }
     return 0;
 }
