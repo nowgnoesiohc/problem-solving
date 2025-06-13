@@ -36,9 +36,6 @@ function solution(dirs) {
     var answer = 0;
     for(let i = 0; i < hd.length; i++){
         let isRe = 0;
-        for(let j = 0; j < i; j++){
-            if(hx[i]==hx[j] && hy[i]==hy[j] && hd[i]==hd[j]) isRe = 1;
-        }
                     
         let tmp;
         if(hd[i]=='D') tmp = 'U';
@@ -47,6 +44,7 @@ function solution(dirs) {
         else if(hd[i]=='R') tmp = 'L';
         
         for(let j = 0; j < i; j++){
+            if(hx[i]==hx[j] && hy[i]==hy[j] && hd[i]==hd[j]) isRe = 1;
             if(hx[i]==hx[j+1] && hy[i]==hy[j+1] && tmp==hd[j]) isRe = 1;
         }
         if(isRe == 0) answer++;
