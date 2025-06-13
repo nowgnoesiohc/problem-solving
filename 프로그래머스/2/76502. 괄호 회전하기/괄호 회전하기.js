@@ -12,7 +12,7 @@ function isRight(str){
             return false;
         }
     }
-    return stack.length === 0;
+    return !stack.length;
 }
 
 function solution([...s]) {
