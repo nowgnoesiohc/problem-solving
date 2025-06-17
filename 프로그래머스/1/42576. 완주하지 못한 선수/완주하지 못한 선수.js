@@ -1,12 +1,13 @@
 function solution(participant, completion) {
-    let answer = '';
-    const hash = new Map();
+    const obj = {};
+    for(const p of participant){
+        if(obj[p]) obj[p] += 1;
+        else obj[p] = 1;
+    }
     
-    for(const x of participant) hash.set(x, (hash.get(x) || 0) + 1);
-    for(const x of completion) hash.set(x, (hash.get(x) || 0) - 1);
+    for(const c of completion) obj[c] -= 1;
     
-    hash.forEach((value, key) => {
-        if(value) answer = key;
-    })
-    return answer;
+    for(const key in obj){
+        if(obj[key] > 0) return key;
+    }
 }
