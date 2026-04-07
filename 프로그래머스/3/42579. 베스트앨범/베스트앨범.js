@@ -1,38 +1,31 @@
 function solution(genres, plays) {
-    var answer = [];
-    const gl = genres.length;
-    const gp = {};
-    for(let i=0; i<gl; i++){
-        if(!gp[genres[i]]) gp[genres[i]] = 0;
-        gp[genres[i]] += plays[i];
-    }
-    
-    const gp_sorted = Object.entries(gp).sort((a, b)=>b[1]-a[1]);
-    const keys = [];
-    for(const a of gp_sorted) keys.push(a[0]);
-    // console.log(keys)
-    for(const k of keys){
-        let stp=-1, ndp=-1;
-        let stidx, ndidx;
-        for(let i=0; i<gl; i++){
-            if(k == genres[i]){
-                if(stp < plays[i]){
-                    ndidx = stidx;
-                    stidx = i;
-                    ndp = stp;
-                    stp = plays[i];
-                }
-                else if(ndp < plays[i]){
-                    ndidx = i;
-                    ndp = plays[i]
-                }
-            }
+  const result = [];
+  const map1 = new Map();
+  for (let i = 0; i < genres.length; i++) {
+    map1.set(genres[i], (map1.get(genres[i]) || 0) + plays[i]);
+  }
+  const arr = [...map1].sort((a, b) => b[1] - a[1]);
+  for (let i = 0; i < arr.length; i++) {
+    let cnt = 0;
+    let fst,
+      fst_val = 0;
+    let snd,
+      snd_val = 0;
+    for (let j = 0; j < genres.length; j++) {
+      if (genres[j] == arr[i][0]) {
+        if (plays[j] > fst_val) {
+          snd = fst;
+          snd_val = fst_val;
+          fst = j;
+          fst_val = plays[j];
+        } else if (plays[j] > snd_val) {
+          snd = j;
+          snd_val = plays[j];
         }
-        answer.push(stidx);
-        if(ndp != -1) answer.push(ndidx);
-        // console.log(answer)
+      }
     }
-    
-    
-    return answer;
+    result.push(fst);
+    if (snd_val) result.push(snd);
+  }
+  return result;
 }
