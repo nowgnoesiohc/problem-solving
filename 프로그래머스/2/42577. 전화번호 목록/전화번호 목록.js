@@ -1,7 +1,13 @@
 function solution(phone_book) {
-  phone_book.sort();
-  for(let i=0; i<phone_book.length-1; i++) {
-    if(phone_book[i+1].startsWith(phone_book[i])) return false;
+  const map = new Map()
+  for (const x of phone_book) {
+    map.set(x, true)
+  }
+  for (const x of phone_book) {
+    for (let i = 0; i < x.length; i++) {
+      const tmp = x.slice(0, i);
+      if(map.has(tmp)) return false;
+    }
   }
   return true;
 }
